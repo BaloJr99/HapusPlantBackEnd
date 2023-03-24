@@ -1,0 +1,17 @@
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Bussiness.deps.json
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Bussiness.dll
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Bussiness.pdb
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Common.dll
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Data.dll
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Common.pdb
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\bin\Debug\net7.0\HapusPlant.Data.pdb
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.csproj.AssemblyReference.cache
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.AssemblyInfoInputs.cache
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.AssemblyInfo.cs
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.csproj.CoreCompileInputs.cache
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.csproj.CopyComplete
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.dll
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\refint\HapusPlant.Bussiness.dll
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\HapusPlant.Bussiness.pdb
+C:\Users\baloc\OneDrive\Documentos\HapusPlant\Backend\HapusPlant.Bussiness\obj\Debug\net7.0\ref\HapusPlant.Bussiness.dll

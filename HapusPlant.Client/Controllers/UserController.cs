@@ -33,7 +33,7 @@ namespace HapusPlant.Client.Controllers
                 Guid IdUser = await _user.CreateUser(newUserDTO);
                 return Ok(new { success = true });
             }
-                return Ok(new { success = false });
+            throw new ApplicationException("An error occurred during registration");
         }
     }
 }

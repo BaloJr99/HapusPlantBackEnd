@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HapusPlant.Bussiness.Interfaces;
 using HapusPlant.Data.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,13 @@ namespace HapusPlant.Client.Controllers
     public class SucculentKindController : BaseController
     {
         private readonly ISucculentKindService _succulentKind;
-        public SucculentKindController(ISucculentKindService succulentKind)
+        private readonly ISucculentFamilyService _succulentFamily;
+        private readonly IMapper _mapper;
+        public SucculentKindController(ISucculentKindService succulentKind, IMapper mapper, ISucculentFamilyService succulentFamily)
         {
             _succulentKind = succulentKind;
+            _mapper = mapper;
+            _succulentFamily = succulentFamily;
         }
         
         [HttpPost]
@@ -30,7 +35,15 @@ namespace HapusPlant.Client.Controllers
 
         [HttpGet]
         public async Task<ActionResult> Index(){
-            return Ok(await _succulentKind.GetSucculentFamilies(userData.IdUser));
+            IEnumerable<SucculentKindDTO>  listOfSucculentsWithOutFamilies = await _succulentKind.GetSucculentKinds(userData.IdUser);
+            List<SearchSucculentKindDTO> listOfSucculentsWithFamilies = new List<SearchSucculentKindDTO>();
+            foreach (var succulent in listOfSucculentsWithOutFamilies)
+            {
+                SearchSucculentKindDTO search = _mapper.Map<SearchSucculentKindDTO>(succulent);
+                search.SucculentFamily = (await _succulentFamily.GetSucculentFamilyById(succulent.IdSucculentFamily, userData.IdUser)).Family;
+                listOfSucculentsWithFamilies.Add(search);
+            }
+            return Ok(listOfSucculentsWithFamilies);
         }
 
         [HttpGet]

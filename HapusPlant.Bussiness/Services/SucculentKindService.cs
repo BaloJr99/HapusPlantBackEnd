@@ -40,7 +40,7 @@ namespace HapusPlant.Bussiness.Services
             await _uok.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<SucculentKindDTO>> GetSucculentFamilies(Guid idUser)
+        public async Task<IEnumerable<SucculentKindDTO>> GetSucculentKinds(Guid idUser)
         {
             return _mapper.Map<IEnumerable<SucculentKindDTO>>(await _uok.GetRepository<SucculentKind>().GetWhereAsync(x => x.IdUser == idUser));
         }

@@ -26,6 +26,7 @@ namespace HapusPlant.Bussiness.Automapper
             CreateMap<PersonalDatum, PersonalDatumDTO>().ReverseMap();
             CreateMap<SucculentFamily, SucculentFamilyDTO>().ReverseMap();
             CreateMap<SucculentKind, SucculentKindDTO>().ReverseMap();
+            CreateMap<SucculentKindDTO, SearchSucculentKindDTO>().ReverseMap();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace HapusPlant.Bussiness.Interfaces
         public Task CreateSucculentKind(SucculentKindDTO succulentKindDTO);
         public Task EditSucculentKind(SucculentKindDTO succulentKindDTO);
         public Task DeleteSucculentKind(Guid idSucculentKind);
-        public Task<IEnumerable<SucculentKindDTO>> GetSucculentFamilies(Guid idUser);
+        public Task<IEnumerable<SucculentKindDTO>> GetSucculentKinds(Guid idUser);
         public Task<SucculentKindDTO> GetSucculentKindById(Guid idSucculentKind, Guid idUser);
     }
 }

@@ -15,6 +15,7 @@ namespace HapusPlant.Client.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateSucculentFamily([FromBody]SucculentFamilyDTO succulentFamilyDTO){
             if(ModelState.IsValid){
+                succulentFamilyDTO.IdUser = userData.IdUser;
                 await _succulentFamily.CreateSucculentFamily(succulentFamilyDTO);
                 return Ok(new { success = true });
             }

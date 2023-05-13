@@ -21,6 +21,7 @@ namespace HapusPlant.Client.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateSucculentKind([FromBody]SucculentKindDTO succulentKindDTO){
             if(ModelState.IsValid){
+                succulentKindDTO.IdUser = userData.IdUser;
                 await _succulentKind.CreateSucculentKind(succulentKindDTO);
                 return Ok(new { success = true });
             }

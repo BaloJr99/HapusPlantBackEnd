@@ -44,6 +44,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPersonalDatumService, PersonalDatumService>();
 builder.Services.AddScoped<ISucculentFamilyService, SucculentFamilyService>();
 builder.Services.AddScoped<ISucculentKindService, SucculentKindService>();
+builder.Services.AddScoped<ISharedCollectionService, SharedCollectionService>();
 builder.Services.AddDbContext<HapusplantContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("HapusPlantSql"));
     options.EnableSensitiveDataLogging();

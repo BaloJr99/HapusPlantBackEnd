@@ -40,10 +40,11 @@ namespace HapusPlant.Client.Controllers
             foreach (var succulent in listOfSucculentsWithOutFamilies)
             {
                 SearchSucculentKindDTO search = _mapper.Map<SearchSucculentKindDTO>(succulent);
-                search.SucculentFamily = (await _succulentFamily.GetSucculentFamilyById(succulent.IdSucculentFamily, userData.IdUser)).Family;
+                string succulentFamily = (await _succulentFamily.GetSucculentFamilyById(succulent.IdSucculentFamily, userData.IdUser)).Family;
+                search.SucculentName = $"{succulentFamily} {search.SucculentName}";
                 listOfSucculentsWithFamilies.Add(search);
             }
-            return Ok(listOfSucculentsWithFamilies);
+            return Ok(listOfSucculentsWithFamilies.OrderBy(x => x.SucculentName));
         }
 
         [HttpGet]

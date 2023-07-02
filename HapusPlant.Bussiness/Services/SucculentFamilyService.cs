@@ -13,11 +13,13 @@ namespace HapusPlant.Bussiness.Services
     public class SucculentFamilyService : ISucculentFamilyService
     {
         private readonly IUnitOfWorkHapus _uok;
+        private readonly ISharedCollectionService _sharedCollection;
         private readonly IMapper _mapper;
-        public SucculentFamilyService(IUnitOfWorkHapus uok, IMapper mapper)
+        public SucculentFamilyService(IUnitOfWorkHapus uok, IMapper mapper, ISharedCollectionService sharedCollection)
         {
             _uok = uok;
             _mapper = mapper;
+            _sharedCollection = sharedCollection;
         }
         public async Task CreateSucculentFamily(SucculentFamilyDTO succulentFamilyDTO)
         {
@@ -42,14 +44,16 @@ namespace HapusPlant.Bussiness.Services
 
         public async Task<IEnumerable<SucculentFamilyDTO>> GetSucculentFamilies(Guid idUser)
         {
-            return _mapper.Map<IEnumerable<SucculentFamilyDTO>>(await _uok.GetRepository<SucculentFamily>().GetWhereAsync(x => x.IdUser == idUser));
+            IEnumerable<Guid> sharedCollection = await _sharedCollection.GetSharedCollections(idUser);
+            return _mapper.Map<IEnumerable<SucculentFamilyDTO>>(await _uok.GetRepository<SucculentFamily>().GetWhereAsync(x => x.IdUser == idUser || sharedCollection.Contains(x.IdUser))).OrderBy(x => x.Family);
         }
 
         public async Task<SucculentFamilyDTO> GetSucculentFamilyById(Guid idSucculentFamily, Guid idUser)
         {
+            IEnumerable<Guid> sharedCollection = await _sharedCollection.GetSharedCollections(idUser);
             SucculentFamily succulentFamily = await _uok.GetRepository<SucculentFamily>().GetByIdAsync(idSucculentFamily);
             if(succulentFamily != null)
-                if(succulentFamily.IdUser != idUser)
+                if(succulentFamily.IdUser != idUser && !sharedCollection.Contains(succulentFamily.IdUser))
                     throw new Exception("You are not authorized to implement this operation");
             return _mapper.Map<SucculentFamilyDTO>(succulentFamily);
         }

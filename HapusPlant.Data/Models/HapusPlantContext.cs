@@ -17,6 +17,8 @@ public partial class HapusplantContext : DbContext
 
     public virtual DbSet<PersonalDatum> PersonalData { get; set; }
 
+    public virtual DbSet<SharedCollection> SharedCollections { get; set; }
+
     public virtual DbSet<SucculentFamily> SucculentFamilies { get; set; }
 
     public virtual DbSet<SucculentKind> SucculentKinds { get; set; }
@@ -25,7 +27,7 @@ public partial class HapusplantContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=BALOJRLAP\\BALOJRSERVER;Initial Catalog=hapusplant;User Id=sa;Password=Pirata99*;Encrypt=False");
+        => optionsBuilder.UseSqlServer("Data Source=BALOJRLAP\\BALOJRSERVER;Initial Catalog=Hapusplant;User Id=sa;Password=Pirata99*;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,6 +51,30 @@ public partial class HapusplantContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("photo");
+        });
+
+        modelBuilder.Entity<SharedCollection>(entity =>
+        {
+            entity.HasKey(e => e.IdSharedCollection).HasName("PK__SharedCo__2D18995B594F2FFE");
+
+            entity.ToTable("SharedCollection");
+
+            entity.Property(e => e.IdSharedCollection)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("idSharedCollection");
+            entity.Property(e => e.IdOriginalUser).HasColumnName("idOriginalUser");
+            entity.Property(e => e.IdSharedUser).HasColumnName("idSharedUser");
+            entity.Property(e => e.IsShared).HasColumnName("isShared");
+
+            entity.HasOne(d => d.IdOriginalUserNavigation).WithMany(p => p.SharedCollectionIdOriginalUserNavigations)
+                .HasForeignKey(d => d.IdOriginalUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SharedCollection_UsersOrignal");
+
+            entity.HasOne(d => d.IdSharedUserNavigation).WithMany(p => p.SharedCollectionIdSharedUserNavigations)
+                .HasForeignKey(d => d.IdSharedUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SharedCollection_UsersShared");
         });
 
         modelBuilder.Entity<SucculentFamily>(entity =>

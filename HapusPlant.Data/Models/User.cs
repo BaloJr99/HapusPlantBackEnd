@@ -21,6 +21,10 @@ public partial class User
 
     public virtual PersonalDatum IdPersonalDataNavigation { get; set; } = null!;
 
+    public virtual ICollection<SharedCollection> SharedCollectionIdOriginalUserNavigations { get; } = new List<SharedCollection>();
+
+    public virtual ICollection<SharedCollection> SharedCollectionIdSharedUserNavigations { get; } = new List<SharedCollection>();
+
     public virtual ICollection<SucculentFamily> SucculentFamilies { get; } = new List<SucculentFamily>();
 
     public virtual ICollection<SucculentKind> SucculentKinds { get; } = new List<SucculentKind>();

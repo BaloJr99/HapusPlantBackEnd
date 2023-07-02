@@ -12,5 +12,6 @@ namespace HapusPlant.Bussiness.Interfaces
         public Task DeleteProfile(Guid id);
         public Task<IEnumerable<PersonalDatumDTO>> GetProfiles();
         public Task<PersonalDatumDTO> GetProfileById(Guid idPersonalData);
+        public Task<IEnumerable<SharedUserDTO>> SearchMatchingNames(string username, Guid idUser);
     }
 }

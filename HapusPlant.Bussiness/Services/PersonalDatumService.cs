@@ -45,5 +45,18 @@ namespace HapusPlant.Bussiness.Services
             IEnumerable<PersonalDatum> listOfPersonalDatum = await _uok.GetRepository<PersonalDatum>().GetAllAsync();
             return _mapper.Map<IEnumerable<PersonalDatumDTO>>(listOfPersonalDatum);
         }
+
+        public async Task<IEnumerable<SharedUserDTO>> SearchMatchingNames(string username, Guid idUser)
+        {
+            IEnumerable<PersonalDatum> personalData = await _uok.GetRepository<PersonalDatum>().GetWhereAsync(x => (x.Name + " " + x.LastName).Contains(username));
+            IEnumerable<Guid> personalGuids = personalData.Select(x => x.IdPersonalData);
+            IEnumerable<User> users = await _uok.GetRepository<User>().GetWhereAsync(x => personalGuids.Contains(x.IdPersonalData) && x.IdUser != idUser);
+            var userData = personalData.Join(users, personal => personal.IdPersonalData, user => user.IdPersonalData, (personal, user) => new SharedUserDTO {
+                FullName = personal.Name + " " + personal.LastName,
+                IdUser = user.IdUser,
+                Photo = personal.Photo
+            });
+            return userData;
+        }
     }
 }

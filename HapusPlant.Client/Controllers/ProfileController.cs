@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HapusPlant.Client.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         private readonly IPersonalDatumService _personalDatum;
         public ProfileController(IPersonalDatumService personalDatum)
@@ -25,9 +25,8 @@ namespace HapusPlant.Client.Controllers
         }
 
         [HttpGet]
-        [Route("/Profile/{idUser}")]
-        public async Task<ActionResult> Index(Guid idUser){
-            var profile = await _personalDatum.GetProfileById(idUser);
+        public async Task<ActionResult> GetProfile(){
+            var profile = await _personalDatum.GetProfileById(userData.IdUser);
             return Ok(profile);
         }
 
@@ -46,5 +45,17 @@ namespace HapusPlant.Client.Controllers
             await _personalDatum.DeleteProfile(idUser);
             return Ok(new { success = true });
         }
+        
+        [HttpGet]
+        [Route("/Profile/GetMatchingUsers/{username}")]
+        public async Task<ActionResult> GetMatchingUsers(string username){
+            if(!String.IsNullOrEmpty(username)){
+                IEnumerable<SharedUserDTO> matchingProfiles = await _personalDatum.SearchMatchingNames(username, userData.IdUser);
+                return Ok(matchingProfiles);
+            }
+            throw new ApplicationException("Please provide a valid username");
+        }
+
+        
     }
 }
